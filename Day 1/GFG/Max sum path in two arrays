@@ -1,0 +1,116 @@
+//LINK:-https://practice.geeksforgeeks.org/problems/max-sum-path-in-two-arrays/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+// } Driver Code Ends
+class Solution{
+    public:
+    /*You are required to complete this method*/
+     int max_path_sum(int A[], int B[], int l1, int l2)
+    {
+    
+        //Your code here
+     int n=max(l1,l2);
+     int sum1=0,sum2=0;
+     int i=0,j=0,result=0;
+     while(i<l1&&j<l2)
+     {
+         if(A[i]<B[j])
+         {
+             sum1+=A[i];
+             i++;
+         }
+         else if(B[j]<A[i])
+         {
+
+             sum2+=B[j];
+             j++;
+         }
+         else {
+             result += max(sum1, sum2) + A[i];
+                sum1 = 0;
+                sum2 = 0;
+                i++;
+                j++;
+         }
+     }
+     while(i<l1)
+     {
+         sum1+=A[i];
+         i++;
+     }
+     while(j<l2)
+     {
+         sum2+=B[j];
+         j++;
+     }
+     
+       result += max(sum1, sum2);
+
+        return result;
+    //     int n=0;
+    //     if(l1>l2)n=l1;
+    //     else n=l2;
+    //     int sum=0;
+    //     if(l1>l2)
+    // {
+    //     bool flag=false;
+    //     for(int i=0;i<n;i++)
+    //     {
+    //         if(A[i]!=B[i]&&flag==false)
+    //         sum+=B[i];
+    //         else if(A[i]==B[i]&&flag==false)
+    //         {
+    //             sum+=A[i];
+    //             flag=true;
+    //         }
+    //         else sum+=A[i];
+    //     }
+     
+    // }
+    // else {
+    //     bool flag=false;
+    //     for(int i=0;i<n;i++)
+    //     {
+    //         if(A[i]!=B[i]&&flag==false)
+    //         sum+=A[i];
+    //         else if(A[i]==B[i]&&flag==false)
+    //         {
+    //             sum+=B[i];
+    //             flag=true;
+    //         }
+    //         else sum+=B[i];
+    //     }
+    // }
+    //   return sum;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int T;
+    cin>>T;
+
+    while(T--)
+    {
+        int N,M;
+        cin>>N>>M;
+        fflush(stdin);
+        int a[N],b[M];
+        for(int i=0;i<N;i++)
+            cin>>a[i];
+        for(int i=0;i<M;i++)
+            cin>>b[i];
+        Solution obj;
+        int result = obj.max_path_sum(a,b,N,M);
+        cout<<result<<endl;
+    }
+}
+
+
+// } Driver Code Ends
